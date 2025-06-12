@@ -16,6 +16,9 @@ public class Entity {
     }
 
     public <T extends Component> T getComponent(Class<T> type) {
-        return type.cast(components.get(type));
+        Component c = components.get(type);
+        if (c == null) return null;
+        return type.cast(c);
     }
+
 }
