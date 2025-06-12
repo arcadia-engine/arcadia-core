@@ -71,15 +71,16 @@ arcadia-core/
 
 ###📜 Devlog & Roadmap
 
-Devlogs: https://github.com/arcadia-engine/arcadia-planning/tree/main/devlogs  
-Roadmap: https://github.com/arcadia-engine/arcadia-planning/blob/main/milestones/roadmap-v0.1.md
+[DevLogs](https://github.com/arcadia-engine/arcadia-planning/tree/main/devlogs)
+[Roadmap](https://github.com/arcadia-engine/arcadia-planning/blob/main/milestones/roadmap-v0.1.md)
+
 This module is actively maintained and tracked via the arcadia-planning repo.
 
 ---
 
 ### 💬 Author
 
-Built by @Hemerley  
+Built by [Hemerley](https://github.com/Hemerley) as a modern ECS engine for custom 2D games and MMOs.  
 Systems developer · Tools engineer · MMO enthusiast  
 MIT Licensed · Java 17+
 
