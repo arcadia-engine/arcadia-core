@@ -63,7 +63,9 @@ arcadia-core/
 ### 👁️ Example Output
 
 [21:11:22] [INFO] [Arcadia] 🌀 Arcadia Engine started...
+
 [21:11:23] [DEBUG] [Arcadia] PhysicsSystem → Entity 84c4... moved to Position(14, 25)
+
 [21:11:24] [DEBUG] [Arcadia] Rendering player on screen...
 
 
