@@ -71,9 +71,10 @@ arcadia-core/
 
 ###📜 Devlog & Roadmap
 
-[Arcadia Engine](https://github.com/arcadia-engine)
 [DevLogs](https://github.com/arcadia-engine/arcadia-planning/tree/main/devlogs)
+
 [Roadmap](https://github.com/arcadia-engine/arcadia-planning/blob/main/milestones/roadmap-v0.1.md)
+
 
 This module is actively maintained and tracked via the arcadia-planning repo.
 
