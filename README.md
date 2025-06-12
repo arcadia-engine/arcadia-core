@@ -1,17 +1,22 @@
 # Arcadia Core
 
-The heart of the Arcadia Engine. Handles low-level systems like:
-- Tile engine
-- ECS (Entity Component System)
-- Rendering pipeline
-- Input handling
-- Game loop
+🚧 The foundational module of the Arcadia Engine.
+
+Handles all core engine logic, including:
+- 🧱 Entity-Component System (ECS)
+- 🌀 Game loop and timing
+- 🎮 Input handling
+- 🎨 Tile engine and animations
+- 💾 Save/load system
+- 📦 Resource loading (JSON / assets)
 
 ### Technologies
 - Java 17+
-- LibGDX or LWJGL (to be confirmed)
-- Modular engine architecture
+- Modular architecture
+- Built for reusability and extension
 
 ---
 
-This module is used by `arcadia-client` and `arcadia-server`.
+## 🔗 Related Modules
+- [`arcadia-client`](https://github.com/arcadia-engine/arcadia-client)
+- [`arcadia-server`](https://github.com/arcadia-engine/arcadia-server)
