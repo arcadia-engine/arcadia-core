@@ -1,5 +1,9 @@
 package com.arcadia.core.entity;
 
+import com.arcadia.core.components.InputIntentComponent;
+import com.arcadia.core.components.PlayerControlledComponent;
+import com.arcadia.core.components.PositionComponent;
+import com.arcadia.core.components.VelocityComponent;
 import com.arcadia.core.util.EngineLogger;
 
 public class EntityFactory {

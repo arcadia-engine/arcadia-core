@@ -1,5 +1,6 @@
 package com.arcadia.core.system;
 
+import com.arcadia.core.components.PositionComponent;
 import com.arcadia.core.entity.*;
 import com.arcadia.core.util.*;
 import java.util.List;

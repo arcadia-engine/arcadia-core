@@ -1,4 +1,6 @@
-package com.arcadia.core.entity;
+package com.arcadia.core.components;
+
+import com.arcadia.core.entity.Component;
 
 public class InputIntentComponent implements Component {
     public double moveX = 0;

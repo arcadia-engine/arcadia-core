@@ -1,5 +1,6 @@
-package com.arcadia.core;
+package com.arcadia.core.engine;
 
+import com.arcadia.core.components.PositionComponent;
 import com.arcadia.core.entity.*;
 
 public class ArcadiaMain {
