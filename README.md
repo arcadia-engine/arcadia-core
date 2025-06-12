@@ -1,59 +1,63 @@
 # 🧱 Arcadia Core
 
-**Arcadia Core** is the foundational ECS (Entity-Component-System) framework powering the Arcadia Engine. It is responsible for simulation logic, game loop control, and system execution—independent of rendering, input, or networking.
+**Arcadia Core** is the foundational ECS (Entity-Component-System) framework powering the [Arcadia Engine](https://github.com/arcadia-engine).  
+It handles simulation logic, game loop control, and system execution—completely decoupled from rendering, input, or networking.
+
+Built for modularity, clarity, and classic 2D game logic.
 
 ---
 
-### ✅ Current Features
+## ✅ Features
 
-- ⚙️ **Fixed Timestep Game Loop**  
-  Runs at 60 FPS with clean separation of update and render phases.
+### ⚙️ Fixed Timestep Game Loop
+- Runs at 60 FPS using delta time
+- Clean separation between simulation and rendering phases
 
-- 🧠 **Entity-Component-System Architecture**  
-  Lightweight, modular ECS design:
-  - `EntityManager`
-  - `Component` and base components like `PositionComponent`, `VelocityComponent`
-  - `GameSystem` interface for pluggable behavior
+### 🧠 Entity-Component-System Architecture
+- Lightweight, pluggable ECS
+- Components define behavior without inheritance
+- `EntityManager` handles creation and lifecycle
+- `GameSystem` interface allows drop-in system modules
 
-- 🌀 **Physics System**  
-  Applies velocity to entity positions using `VelocityComponent`.
+### 🌀 Physics System
+- Applies velocity over time using `VelocityComponent`
+- Supports deterministic simulation for multiplayer sync
 
-- 📝 **Engine Logger**  
-  - Color-coded output via ANSI escape codes  
-  - Timestamped entries  
-  - Log levels: `info`, `debug`, `error`  
-  - Fully replaces `System.out.println(...)`
+### 📝 Engine Logger
+- ANSI-colored console output
+- Timestamps and log levels (`info`, `debug`, `error`)
+- Fully replaces `System.out.println(...)` for core logging
 
 ---
 
-### 🚧 In Progress
+## 🚧 In Progress
 
-- `RenderSystem` to visualize entity positions on an ASCII grid  
+- `RenderSystem` for terminal-grid ASCII rendering  
 - `EntityFactory` for structured game object creation  
-- World spatial grid system  
-- Modular system manager  
+- Spatial partitioning (grid-based world navigation)  
+- Pluggable `SystemManager` for runtime injection and priority handling  
 
 ---
 
-### 📁 Package Structure
+## 📁 Package Structure
 
+```plaintext
 arcadia-core/
-├── com.arcadia.core/
-│ ├── ArcadiaMain.java
-│ ├── GameLoop.java
-│ ├── entity/
-│ │ ├── Entity.java
-│ │ ├── EntityManager.java
-│ │ ├── Component.java
-│ │ ├── PositionComponent.java
-│ │ └── VelocityComponent.java
-│ ├── system/
-│ │ ├── GameSystem.java
-│ │ └── PhysicsSystem.java
-│ └── util/
-│ └── EngineLogger.java
-
-
+└── com.arcadia.core/
+    ├── ArcadiaMain.java
+    ├── GameLoop.java
+    ├── entity/
+    │   ├── Entity.java
+    │   ├── EntityManager.java
+    │   ├── Component.java
+    │   ├── PositionComponent.java
+    │   └── VelocityComponent.java
+    ├── system/
+    │   ├── GameSystem.java
+    │   └── PhysicsSystem.java
+    └── util/
+        └── EngineLogger.java
+```
 ---
 
 ### 👁️ Example Output
@@ -65,13 +69,19 @@ arcadia-core/
 
 ---
 
-### 📜 Devlog
+###📜 Devlog & Roadmap
 
-View progress entries here: [arcadia-planning/devlog.md](https://github.com/arcadia-engine/arcadia-planning/blob/main/devlog.md)
+Devlogs: https://github.com/arcadia-engine/arcadia-planning/tree/main/devlogs  
+Roadmap: https://github.com/arcadia-engine/arcadia-planning/blob/main/milestones/roadmap-v0.1.md
+This module is actively maintained and tracked via the arcadia-planning repo.
 
 ---
 
 ### 💬 Author
 
-Built by [Strategist](https://github.com/Hemerley) as a modern ECS engine for custom 2D games and MMOs.
+Built by @Hemerley  
+Systems developer · Tools engineer · MMO enthusiast  
+MIT Licensed · Java 17+
+
+"Simulation before sensation. Logic before light."
 
