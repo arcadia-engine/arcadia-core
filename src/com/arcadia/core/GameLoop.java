@@ -24,30 +24,25 @@ public class GameLoop {
         isRunning = true;
         EngineLogger.info("🌀 Arcadia Engine started...");
 
-
-        final int fps = 60;
-        final double frameTime = 1000.0 / fps;
+        final int fps = 2;
+        final double frameTime = 1000.0 / fps; // milliseconds per frame
+        final double deltaTime = frameTime / 1000.0; // convert to seconds
 
         long lastTime = System.currentTimeMillis();
 
         while (isRunning) {
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastTime >= frameTime) {
-                update();
-                render();
+                update(deltaTime);
                 lastTime = currentTime;
             }
         }
     }
 
-    private void update() {
+    private void update(double deltaTime) {
         for (GameSystem system : systems) {
-            system.update(entityManager);
+            system.update(entityManager, deltaTime);
         }
-    }
-
-    private void render() {
-        EngineLogger.debug("Rendering player on screen...");
     }
 
     public void stop() {
@@ -56,12 +51,14 @@ public class GameLoop {
     }
 
     private void setup() {
-        Entity player = new Entity();
-        player.addComponent(new PositionComponent(10, 25));
-        player.addComponent(new VelocityComponent(1, 0));
-        entityManager.addEntity(player);
+        entityManager.addEntity(EntityFactory.createPlayer(10, 25));
+        entityManager.addEntity(EntityFactory.createWanderer(5, 5));
+        entityManager.addEntity(EntityFactory.createStaticObject(12, 7));
 
+        systems.add(new InputSystem());
+        systems.add(new MovementSystem());
         systems.add(new PhysicsSystem());
+        systems.add(new RenderSystem());
     }
 
 }

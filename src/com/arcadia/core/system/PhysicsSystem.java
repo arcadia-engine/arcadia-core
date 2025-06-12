@@ -8,7 +8,7 @@ import java.util.List;
 public class PhysicsSystem implements GameSystem {
 
     @Override
-    public void update(EntityManager manager) {
+    public void update(EntityManager manager, double deltaTime) {
         List<Entity> entities = manager.getEntitiesWith(PositionComponent.class);
 
         for (Entity e : entities) {
@@ -16,11 +16,11 @@ public class PhysicsSystem implements GameSystem {
             VelocityComponent vel = e.getComponent(VelocityComponent.class);
             if (pos == null || vel == null) continue;
 
-            pos.x += vel.dx;
-            pos.y += vel.dy;
+            pos.x += vel.dx * deltaTime;
+            pos.y += vel.dy * deltaTime;
 
-            EngineLogger.debug("PhysicsSystem → Entity " + e.getId() + " moved to " + pos);
-
+            EngineLogger.physics(e + " moved to Position(" + pos.x + ", " + pos.y + ")");
         }
     }
+
 }

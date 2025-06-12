@@ -30,4 +30,21 @@ public class EngineLogger {
     public static void error(String msg) {
         System.err.println(RED + "[" + now() + "] [ERROR] [Arcadia] " + msg + RESET);
     }
+
+    public static void render(String msg) {
+    System.err.println(YELLOW + "[" + now() + "]" + "[RENDER] " + msg);
+    }
+
+    public static void physics(String msg) {
+       System.err.println(YELLOW + "[" + now() + "]" + "[PHYSICS] " + msg);
+    }
+
+    public static void spawn(String msg) {
+        System.err.println(YELLOW + "[" + now() + "]" + "[SPAWN] " + msg);
+    }
+
+    public static void query(String msg) {
+        System.err.println(GRAY + "[" + now() + "]" + "[QUERY] " + msg);
+    }
+
 }

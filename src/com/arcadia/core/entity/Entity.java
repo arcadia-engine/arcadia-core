@@ -21,4 +21,9 @@ public class Entity {
         return type.cast(c);
     }
 
+    @Override
+    public String toString() {
+        return "Entity[" + id.toString().substring(0, 8) + "]";
+    }
+
 }

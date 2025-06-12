@@ -1,9 +1,9 @@
 package com.arcadia.core.entity;
 
-public class VelocityComponent extends Component {
-    public int dx, dy;
+public class VelocityComponent implements Component {
+    public double dx, dy;
 
-    public VelocityComponent(int dx, int dy) {
+    public VelocityComponent(double dx, double dy) {
         this.dx = dx;
         this.dy = dy;
     }
