@@ -6,9 +6,10 @@ import java.util.List;
 import com.arcadia.core.entity.*;
 import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.io.Renderer;
-import com.arcadia.core.map.MapManager;
 import com.arcadia.core.system.*;
 import com.arcadia.core.util.EngineLogger;
+import com.arcadia.demo.EntityFactory;
+import com.arcadia.demo.map.MapManager;
 
 public class GameLoop {
 

@@ -3,8 +3,8 @@ package com.arcadia.core.system;
 import com.arcadia.core.components.PositionComponent;
 import com.arcadia.core.components.VelocityComponent;
 import com.arcadia.core.entity.*;
-import com.arcadia.core.map.MapManager;
 import com.arcadia.core.util.EngineLogger;
+import com.arcadia.demo.map.MapManager;
 
 import java.util.List;
 

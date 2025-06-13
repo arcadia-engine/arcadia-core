@@ -1,4 +1,4 @@
-package com.arcadia.core.map;
+package com.arcadia.demo.map;
 
 public class Tile {
     public TileType type;

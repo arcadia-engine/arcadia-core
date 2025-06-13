@@ -1,12 +1,13 @@
-package com.arcadia.core.entity;
+package com.arcadia.demo;
 
 import com.arcadia.core.components.InputIntentComponent;
-import com.arcadia.core.components.PlayerControlledComponent;
 import com.arcadia.core.components.PositionComponent;
 import com.arcadia.core.components.RenderLayerComponent;
 import com.arcadia.core.components.RenderableComponent;
 import com.arcadia.core.components.VelocityComponent;
+import com.arcadia.core.entity.Entity;
 import com.arcadia.core.util.EngineLogger;
+import com.arcadia.demo.components.PlayerControlledComponent;
 
 public class EntityFactory {
 

@@ -1,10 +1,10 @@
 package com.arcadia.core.system;
 
 import com.arcadia.core.components.InputIntentComponent;
-import com.arcadia.core.components.PlayerControlledComponent;
 import com.arcadia.core.entity.*;
 import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.util.EngineLogger;
+import com.arcadia.demo.components.PlayerControlledComponent;
 
 import java.util.List;
 

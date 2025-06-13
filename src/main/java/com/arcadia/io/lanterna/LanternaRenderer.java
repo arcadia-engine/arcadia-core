@@ -1,4 +1,4 @@
-package com.arcadia.core.io.lanterna;
+package com.arcadia.io.lanterna;
 
 import com.arcadia.core.io.Renderer;
 import com.googlecode.lanterna.screen.Screen;

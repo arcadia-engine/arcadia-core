@@ -1,14 +1,15 @@
-package com.arcadia.core.engine;
+package com.arcadia.demo;
 
+import com.arcadia.core.engine.GameLoop;
 import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.io.Renderer;
-import com.arcadia.core.io.lanterna.LanternaInputProvider;
-import com.arcadia.core.io.lanterna.LanternaRenderer;
+import com.arcadia.io.lanterna.LanternaInputProvider;
+import com.arcadia.io.lanterna.LanternaRenderer;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.*;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
-public class ArcadiaMain {
+public class DemoMain {
     public static void main(String[] args) {
         Screen screen = null;
         try {
