@@ -10,10 +10,14 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 public class ArcadiaMain {
     public static void main(String[] args) {
+        Screen screen = null;
         try {
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()
-                .setInitialTerminalSize(new TerminalSize(80, 24));
-            Screen screen = terminalFactory.createScreen();
+                .setInitialTerminalSize(new TerminalSize(80, 24))
+                .setTerminalEmulatorTitle("Arcadia Engine")
+                .setPreferTerminalEmulator(true);  // <-- THIS avoids stty.exe on Windows
+
+            screen = terminalFactory.createScreen();
             screen.startScreen();
 
             Renderer renderer = new LanternaRenderer(screen);
@@ -24,6 +28,12 @@ public class ArcadiaMain {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (screen != null) {
+                try {
+                    screen.stopScreen();
+                } catch (Exception ignored) {}
+            }
         }
     }
 }
