@@ -1,22 +1,24 @@
 package com.arcadia.demo;
 
-import com.arcadia.core.engine.GameLoop;
+import com.arcadia.core.engine.ArcadiaApp;
 import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.io.Renderer;
 import com.arcadia.io.lanterna.LanternaInputProvider;
 import com.arcadia.io.lanterna.LanternaRenderer;
+import com.arcadia.core.system.*;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.screen.*;
+import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 public class DemoMain {
     public static void main(String[] args) {
         Screen screen = null;
+
         try {
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()
                 .setInitialTerminalSize(new TerminalSize(80, 24))
                 .setTerminalEmulatorTitle("Arcadia Engine")
-                .setPreferTerminalEmulator(true);  // <-- THIS avoids stty.exe on Windows
+                .setPreferTerminalEmulator(true);
 
             screen = terminalFactory.createScreen();
             screen.startScreen();
@@ -24,8 +26,18 @@ public class DemoMain {
             Renderer renderer = new LanternaRenderer(screen);
             InputProvider input = new LanternaInputProvider(screen);
 
-            GameLoop loop = new GameLoop(renderer, input);
-            loop.start();
+            DemoScene scene = new DemoScene();
+
+            ArcadiaApp app = new ArcadiaApp()
+                .setRenderer(renderer)
+                .setInputProvider(input)
+                .registerSystem(new InputSystem(input))
+                .registerSystem(new MovementSystem())
+                .registerSystem(new PhysicsSystem(scene.getMapManager()))
+                .registerSystem(new RenderSystem(scene.getMapManager(), renderer))
+                .setInitialScene(scene);
+
+            app.start();
 
         } catch (Exception e) {
             e.printStackTrace();

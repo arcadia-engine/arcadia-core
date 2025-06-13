@@ -1,51 +1,28 @@
 package com.arcadia.core.engine;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.arcadia.core.entity.*;
+import com.arcadia.core.entity.EntityManager;
 import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.io.Renderer;
-import com.arcadia.core.system.*;
+import com.arcadia.core.system.GameSystem;
 import com.arcadia.core.util.EngineLogger;
-import com.arcadia.demo.EntityFactory;
-import com.arcadia.demo.map.MapManager;
+
+import java.util.List;
 
 public class GameLoop {
 
     private final EntityManager entityManager;
     private final List<GameSystem> systems;
-    private final MapManager mapManager;
     private final Renderer renderer;
     private final InputProvider input;
 
     private boolean isRunning = false;
 
-    public GameLoop(Renderer renderer, InputProvider input) {
+    public GameLoop(EntityManager entityManager, List<GameSystem> systems,
+                    Renderer renderer, InputProvider input) {
+        this.entityManager = entityManager;
+        this.systems = systems;
         this.renderer = renderer;
         this.input = input;
-        this.entityManager = new EntityManager();
-        this.systems = new ArrayList<>();
-        this.mapManager = new MapManager(new String[] {
-                "####################",
-                "#..................#",
-                "#..####............#",
-                "#..................#",
-                "####################"
-        });
-
-        setup();
-    }
-
-    private void setup() {
-        entityManager.addEntity(EntityFactory.createPlayer(2, 3));         // just above wall
-        entityManager.addEntity(EntityFactory.createWanderer(2, 2));       // inside walkable zone
-        entityManager.addEntity(EntityFactory.createStaticObject(3, 2));   // right of above
-
-        systems.add(new InputSystem(input));
-        systems.add(new MovementSystem());
-        systems.add(new PhysicsSystem(mapManager));
-        systems.add(new RenderSystem(mapManager, renderer));
     }
 
     public void start() {
