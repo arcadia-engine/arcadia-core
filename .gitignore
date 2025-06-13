@@ -1,0 +1,27 @@
+# Java
+*.class
+/out/
+/target/
+/*.iml
+
+# IntelliJ / JetBrains
+.idea/
+*.iws
+*.ipr
+
+# Gradle
+.gradle/
+build/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Terminal history
+.history

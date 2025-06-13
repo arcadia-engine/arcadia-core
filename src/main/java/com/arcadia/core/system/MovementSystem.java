@@ -1,6 +1,7 @@
 package com.arcadia.core.system;
 
 import com.arcadia.core.components.InputIntentComponent;
+import com.arcadia.core.components.PositionComponent;
 import com.arcadia.core.components.VelocityComponent;
 import com.arcadia.core.entity.*;
 import com.arcadia.core.util.EngineLogger;
@@ -10,7 +11,8 @@ import java.util.List;
 public class MovementSystem implements GameSystem {
     @Override
     public void update(EntityManager entityManager, double deltaTime) {
-        List<Entity> entities = entityManager.getEntitiesWith(InputIntentComponent.class);
+        List<Entity> entities = entityManager.getEntitiesWithAll(InputIntentComponent.class, VelocityComponent.class);
+
 
         for (Entity e : entities) {
             InputIntentComponent intent = e.getComponent(InputIntentComponent.class);
