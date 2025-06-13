@@ -1,11 +1,11 @@
 package com.arcadia.core.engine;
 
 import com.arcadia.core.entity.EntityManager;
-import com.arcadia.core.system.GameSystem;
-import com.arcadia.core.scene.Scene;
 import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.io.Renderer;
-import com.arcadia.core.util.*;
+import com.arcadia.core.scene.Scene;
+import com.arcadia.core.system.GameSystem;
+import com.arcadia.core.util.EngineLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ public class ArcadiaApp {
     private Renderer renderer;
     private InputProvider inputProvider;
     private Scene initialScene;
+    private int fps = 60;
 
     public ArcadiaApp setRenderer(Renderer renderer) {
         this.renderer = renderer;
@@ -39,18 +40,21 @@ public class ArcadiaApp {
         return this;
     }
 
+    public ArcadiaApp setFPS(int fps) {
+        this.fps = fps;
+        return this;
+    }
+
     public void start() {
-        EngineLogger.info("Starting ArcadiaApp...");
-
-        if (renderer == null || inputProvider == null) {
-            throw new IllegalStateException("Renderer and InputProvider must be set.");
+        if (renderer == null || inputProvider == null || initialScene == null) {
+            throw new IllegalStateException("Missing required components: renderer, inputProvider, or initialScene.");
         }
 
-        if (initialScene != null) {
-            initialScene.load(entityManager);
-        }
+        EngineLogger.info("📦 Loading scene...");
+        initialScene.load(entityManager);
 
-        GameLoop loop = new GameLoop(entityManager, systems, renderer, inputProvider);
-        loop.start();
+        EngineLogger.info("🎮 Launching game loop...");
+        GameLoop gameLoop = new GameLoop(entityManager, systems, renderer, inputProvider, fps);
+        gameLoop.start();
     }
 }

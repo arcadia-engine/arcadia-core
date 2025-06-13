@@ -1,14 +1,30 @@
-package com.arcadia.demo.map;
+package com.arcadia.core.map;
 
 public enum TileType {
-    FLOOR('.', true),
-    WALL('#', false);
+    FLOOR(true, '.'),
+    WALL(false, '#');
 
-    public final char symbol;
-    public final boolean isWalkable;
+    private final boolean walkable;
+    private final char symbol;
 
-    TileType(char symbol, boolean isWalkable) {
+    TileType(boolean walkable, char symbol) {
+        this.walkable = walkable;
         this.symbol = symbol;
-        this.isWalkable = isWalkable;
+    }
+
+    public boolean isWalkable() {
+        return walkable;
+    }
+
+    public char getSymbol() {
+        return symbol;
+    }
+
+    // Optional: useful for debug, loaders, etc.
+    public static TileType fromSymbol(char c) {
+        for (TileType type : values()) {
+            if (type.symbol == c) return type;
+        }
+        return FLOOR; // fallback
     }
 }

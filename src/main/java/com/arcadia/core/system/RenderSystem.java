@@ -5,8 +5,8 @@ import com.arcadia.core.components.RenderLayerComponent;
 import com.arcadia.core.components.RenderableComponent;
 import com.arcadia.core.entity.*;
 import com.arcadia.core.io.Renderer;
+import com.arcadia.core.map.MapManager;
 import com.arcadia.core.util.EngineLogger;
-import com.arcadia.demo.map.MapManager;
 
 import java.util.List;
 

@@ -1,33 +1,39 @@
 package com.arcadia.demo;
 
 import com.arcadia.core.entity.EntityManager;
+import com.arcadia.core.map.MapManager;
+import com.arcadia.core.map.Tile;
+import com.arcadia.core.map.loader.TileMapLoader;
 import com.arcadia.core.scene.Scene;
-import com.arcadia.demo.map.MapManager;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class DemoScene implements Scene {
-
     private final MapManager mapManager;
 
     public DemoScene() {
-        this.mapManager = new MapManager(new String[] {
-            "####################",
-            "#..................#",
-            "#..####............#",
-            "#..................#",
-            "####################"
-        });
-    }
+        Tile[][] tiles = new Tile[0][0];
 
-    @Override
-    public void load(EntityManager entityManager) {
-        entityManager.addEntity(EntityFactory.createPlayer(2, 3));
-        entityManager.addEntity(EntityFactory.createWanderer(2, 2));
-        entityManager.addEntity(EntityFactory.createStaticObject(3, 2));
+        try {
+            // 🔹 Relative to project root; adjust if needed
+            Path mapPath = Paths.get("maps/demo_map.txt");
+            tiles = TileMapLoader.load(mapPath);
+        } catch (Exception e) {
+            System.err.println("Failed to load map: " + e.getMessage());
+        }
 
-        // You might store the mapManager somewhere global if RenderSystem needs it
+        this.mapManager = new MapManager(tiles);
     }
 
     public MapManager getMapManager() {
         return mapManager;
+    }
+
+    @Override
+    public void load(EntityManager manager) {
+        manager.addEntity(EntityFactory.createPlayer(2, 3));
+        manager.addEntity(EntityFactory.createWanderer(2, 2));
+        manager.addEntity(EntityFactory.createStaticObject(3, 2));
     }
 }

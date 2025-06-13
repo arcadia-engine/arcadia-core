@@ -1,4 +1,4 @@
-package com.arcadia.demo.components;
+package com.arcadia.core.components;
 
 import com.arcadia.core.entity.Component;
 

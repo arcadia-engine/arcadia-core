@@ -3,15 +3,11 @@ package com.arcadia.core.components;
 import com.arcadia.core.entity.Component;
 
 public class PositionComponent implements Component {
-    public double x, y;
+    public int x;
+    public int y;
 
-    public PositionComponent(double x, double y) {
+    public PositionComponent(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Position(%.2f, %.2f)", x, y);
     }
 }
