@@ -1,92 +1,112 @@
 # 🧱 Arcadia Core
 
-**Arcadia Core** is the foundational ECS (Entity-Component-System) framework powering the [Arcadia Engine](https://github.com/arcadia-engine).  
-It handles simulation logic, game loop control, and system execution—completely decoupled from rendering, input, or networking.
+**Arcadia Core** is the foundational ECS runtime of the [Arcadia Engine](https://github.com/arcadia-engine)—a modular Java framework built for developing 2D simulations, roguelikes, and MMO-scale systems.
 
-Built for modularity, clarity, and classic 2D game logic.
+This module provides the core:
+- Entity-Component-System architecture
+- Game loop and simulation timing
+- Modular system pipeline
+- Scene and world loading infrastructure
+
+It is fully decoupled from rendering, input, and networking, and serves as the embeddable logic core for clients, servers, or headless simulations.
 
 ---
 
-## ✅ Features
+## ✅ Core Features
 
-### ⚙️ Fixed Timestep Game Loop
-- Runs at 60 FPS using delta time
-- Clean separation between simulation and rendering phases
+### 🧠 ECS Architecture
+- `Entity`, `Component`, and `System` driven logic
+- Flexible `EntityManager` for lifecycle and state
+- Systems operate independently via `GameSystem` interface
 
-### 🧠 Entity-Component-System Architecture
-- Lightweight, pluggable ECS
-- Components define behavior without inheritance
-- `EntityManager` handles creation and lifecycle
-- `GameSystem` interface allows drop-in system modules
+### 🔁 ArcadiaApp Runtime API
+- Developer-facing app builder: set up scenes, systems, IO, and run the loop
+- Simplifies engine use with a fluent interface
+```java
+new ArcadiaApp()
+  .setRenderer(...)
+  .setInputProvider(...)
+  .registerSystem(new PhysicsSystem(...))
+  .setInitialScene(new DemoScene())
+  .start();
+```
 
-### 🌀 Physics System
-- Applies velocity over time using `VelocityComponent`
-- Supports deterministic simulation for multiplayer sync
+### 🧩 Scene Loading
+- `Scene` interface lets you modularize game states (menu, levels, zones)
+- Supports entity setup, map loading, and system configuration
+
+### 🗺️ Tile-Based Map Support
+- `Tile`, `TileType`, and `MapManager` handle ASCII or grid-based maps
+- Used by rendering and physics for collision, display, and movement
+
+### 🌀 Fixed Timestep Game Loop
+- Consistent delta-time simulation
+- Deterministic logic for multiplayer sync and replay support
+
+### 🎨 IO Abstraction
+- `Renderer` and `InputProvider` interfaces allow pluggable backend support
+- Example implementation: Lanterna ASCII renderer in `arcadia-io-lanterna`
 
 ### 📝 Engine Logger
-- ANSI-colored console output
-- Timestamps and log levels (`info`, `debug`, `error`)
-- Fully replaces `System.out.println(...)` for core logging
+- Clean, ANSI-colored logs with `[info]`, `[debug]`, `[error]` levels
+- Timestamped output replaces all raw `System.out` usage
 
 ---
 
-## 🚧 In Progress
-
-- `RenderSystem` for terminal-grid ASCII rendering  
-- `EntityFactory` for structured game object creation  
-- Spatial partitioning (grid-based world navigation)  
-- Pluggable `SystemManager` for runtime injection and priority handling  
-
----
-
-## 📁 Package Structure
+## 📁 Module Structure
 
 ```plaintext
 arcadia-core/
 └── com.arcadia.core/
-    ├── ArcadiaMain.java
-    ├── GameLoop.java
-    ├── entity/
-    │   ├── Entity.java
-    │   ├── EntityManager.java
-    │   ├── Component.java
-    │   ├── PositionComponent.java
-    │   └── VelocityComponent.java
-    ├── system/
-    │   ├── GameSystem.java
-    │   └── PhysicsSystem.java
-    └── util/
-        └── EngineLogger.java
+    ├── engine/       → ArcadiaApp, GameLoop
+    ├── entity/       → EntityManager, Components
+    ├── components/   → Position, Velocity, Renderable, etc.
+    ├── system/       → GameSystem, PhysicsSystem, RenderSystem
+    ├── io/           → Renderer, InputProvider (interfaces only)
+    ├── map/          → MapManager, Tile, TileType
+    ├── scene/        → Scene interface
+    └── util/         → EngineLogger
 ```
----
-
-### 👁️ Example Output
-
-[21:11:22] [INFO] [Arcadia] 🌀 Arcadia Engine started...
-
-[21:11:23] [DEBUG] [Arcadia] PhysicsSystem → Entity 84c4... moved to Position(14, 25)
-
-[21:11:24] [DEBUG] [Arcadia] Rendering player on screen...
-
 
 ---
 
-###📜 Devlog & Roadmap
+## 🚧 In Progress / Roadmap
 
-[DevLogs](https://github.com/arcadia-engine/arcadia-planning/tree/main/devlogs)
-
-[Roadmap](https://github.com/arcadia-engine/arcadia-planning/blob/main/milestones/roadmap-v0.1.md)
-
-
-This module is actively maintained and tracked via the arcadia-planning repo.
+- `SystemManager` for runtime system ordering and lifecycle hooks  
+- `TileMapLoader` (load ASCII, JSON, or binary map data)  
+- `AnimationSystem` for 2D sprite timing  
+- `ArcadiaConnection` for multiplayer support (via arcadia-net)  
+- `ViewportSystem` for scrolling maps and camera control  
+- `UISystem` for healthbars, labels, and message overlays  
 
 ---
 
-### 💬 Author
+## 🔁 Example Log Output
 
-Built by [Hemerley](https://github.com/Hemerley) as a modern ECS engine for custom 2D games and MMOs.  
-Systems developer · Tools engineer · MMO enthusiast  
+```
+[21:11:22] [INFO]  [Arcadia] 🌀 Arcadia Engine started...
+[21:11:23] [DEBUG] [PhysicsSystem] Entity e72a... moved to (3, 4)
+[21:11:24] [DEBUG] [RenderSystem] Drew player on map layer 1
+```
+
+---
+
+## 📚 Related Modules
+
+- [`arcadia-client`](https://github.com/arcadia-engine/arcadia-client) → frontend rendering & input
+- [`arcadia-server`](https://github.com/arcadia-engine/arcadia-server) → headless simulation server
+- [`arcadia-net`](https://github.com/arcadia-engine/arcadia-net) → WIP network layer (ArcadiaConnection)
+- [`arcadia-demo`](https://github.com/arcadia-engine/arcadia-demo) → example game and test zone
+- [`arcadia-planning`](https://github.com/arcadia-engine/arcadia-planning) → devlogs, specs, roadmaps
+
+---
+
+## 🧠 Philosophy
+
+Built by [Hemerley](https://github.com/Hemerley) as a modern Java-first engine for simulation-heavy games.
+
+- Systems-first, not graphics-first.
+- Simulation before sensation. Logic before light.
+- Designed for tinkering, prototyping, and mastery of state.
+
 MIT Licensed · Java 17+
-
-"Simulation before sensation. Logic before light."
-
