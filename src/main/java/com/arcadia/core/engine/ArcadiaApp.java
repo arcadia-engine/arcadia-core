@@ -4,15 +4,12 @@ import com.arcadia.core.entity.EntityManager;
 import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.io.Renderer;
 import com.arcadia.core.scene.Scene;
-import com.arcadia.core.system.GameSystem;
+import com.arcadia.core.system.SystemManager;
 import com.arcadia.core.util.EngineLogger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ArcadiaApp {
 
-    private final List<GameSystem> systems = new ArrayList<>();
+    private final SystemManager systemManager = new SystemManager();
     private final EntityManager entityManager = new EntityManager();
 
     private Renderer renderer;
@@ -27,11 +24,6 @@ public class ArcadiaApp {
 
     public ArcadiaApp setInputProvider(InputProvider inputProvider) {
         this.inputProvider = inputProvider;
-        return this;
-    }
-
-    public ArcadiaApp registerSystem(GameSystem system) {
-        this.systems.add(system);
         return this;
     }
 
@@ -51,10 +43,10 @@ public class ArcadiaApp {
         }
 
         EngineLogger.info("📦 Loading scene...");
-        initialScene.load(entityManager);
+        initialScene.load(systemManager, entityManager);
 
         EngineLogger.info("🎮 Launching game loop...");
-        GameLoop gameLoop = new GameLoop(entityManager, systems, renderer, inputProvider, fps);
+        GameLoop gameLoop = new GameLoop(entityManager, systemManager, renderer, inputProvider, fps);
         gameLoop.start();
     }
 }

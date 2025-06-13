@@ -58,6 +58,7 @@ public class RenderSystem implements GameSystem {
             }
         }
 
+        EngineLogger.render("🖥️ Render frame"); // 🔍 NEW: render debug line
         renderer.render(grid);
     }
 }

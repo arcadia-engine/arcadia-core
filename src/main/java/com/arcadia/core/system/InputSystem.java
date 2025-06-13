@@ -19,6 +19,11 @@ public class InputSystem implements GameSystem {
     public void update(EntityManager entityManager, double deltaTime) {
         List<Entity> entities = entityManager.getEntitiesWithAll(InputIntentComponent.class);
 
+        char key = input.pollInput();
+        if (key != 0) {
+            System.out.println("[INPUT POLL] Received key: " + key);
+        }
+
         for (Entity e : entities) {
             if (e.getComponent(PlayerControlledComponent.class) == null) continue;
 
@@ -26,7 +31,6 @@ public class InputSystem implements GameSystem {
             if (intent == null) continue;
 
             intent.clear();
-            char key = input.pollInput();
 
             switch (key) {
                 case 'w' -> intent.moveY = -1;
@@ -35,7 +39,9 @@ public class InputSystem implements GameSystem {
                 case 'd' -> intent.moveX = 1;
             }
 
-            EngineLogger.debug("[INPUT] " + e + " received input: (" + intent.moveX + ", " + intent.moveY + ")");
+            if (intent.moveX != 0 || intent.moveY != 0) {
+                EngineLogger.debug("[INPUT] " + e + " → (" + intent.moveX + ", " + intent.moveY + ")");
+            }
         }
     }
 }

@@ -5,7 +5,6 @@ import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.io.Renderer;
 import com.arcadia.io.lanterna.LanternaInputProvider;
 import com.arcadia.io.lanterna.LanternaRenderer;
-import com.arcadia.core.system.*;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -26,16 +25,11 @@ public class DemoMain {
             Renderer renderer = new LanternaRenderer(screen);
             InputProvider input = new LanternaInputProvider(screen);
 
-            DemoScene scene = new DemoScene();
-
             ArcadiaApp app = new ArcadiaApp()
                 .setRenderer(renderer)
                 .setInputProvider(input)
-                .registerSystem(new InputSystem(input))
-                .registerSystem(new MovementSystem())
-                .registerSystem(new PhysicsSystem(scene.getMapManager()))
-                .registerSystem(new RenderSystem(scene.getMapManager(), renderer))
-                .setInitialScene(scene);
+                .setInitialScene(new DemoScene(renderer, input))
+                .setFPS(60);
 
             app.start();
 

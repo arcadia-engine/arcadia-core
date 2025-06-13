@@ -3,15 +3,13 @@ package com.arcadia.core.engine;
 import com.arcadia.core.entity.EntityManager;
 import com.arcadia.core.io.InputProvider;
 import com.arcadia.core.io.Renderer;
-import com.arcadia.core.system.GameSystem;
+import com.arcadia.core.system.SystemManager;
 import com.arcadia.core.util.EngineLogger;
-
-import java.util.List;
 
 public class GameLoop {
 
     private final EntityManager entityManager;
-    private final List<GameSystem> systems;
+    private final SystemManager systemManager;
     private final Renderer renderer;
     private final InputProvider input;
 
@@ -21,10 +19,9 @@ public class GameLoop {
 
     private boolean isRunning = false;
 
-    public GameLoop(EntityManager entityManager, List<GameSystem> systems,
-                    Renderer renderer, InputProvider input, int fps) {
+    public GameLoop(EntityManager entityManager, SystemManager systemManager, Renderer renderer, InputProvider input, int fps) {
         this.entityManager = entityManager;
-        this.systems = systems;
+        this.systemManager = systemManager;
         this.renderer = renderer;
         this.input = input;
         this.fps = fps;
@@ -46,13 +43,11 @@ public class GameLoop {
             lastTime = currentTime;
             accumulator += elapsed;
 
-            // Update in fixed time steps
             while (accumulator >= frameTime) {
                 update(deltaTime);
                 accumulator -= frameTime;
             }
 
-            // Sleep to maintain target FPS
             long frameDuration = System.currentTimeMillis() - currentTime;
             long sleepTime = (long) frameTime - frameDuration;
 
@@ -68,9 +63,7 @@ public class GameLoop {
     }
 
     private void update(double deltaTime) {
-        for (GameSystem system : systems) {
-            system.update(entityManager, deltaTime);
-        }
+        systemManager.updateAll(entityManager, deltaTime);
     }
 
     public void stop() {

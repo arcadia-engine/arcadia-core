@@ -4,7 +4,6 @@ import com.arcadia.core.io.Renderer;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-
 public class LanternaRenderer implements Renderer {
     private final Screen screen;
 
@@ -15,23 +14,19 @@ public class LanternaRenderer implements Renderer {
     @Override
     public void render(char[][] buffer) {
         try {
-            screen.clear(); // 🧼 clear previous frame!
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to clear screen", e);
-        }
+            screen.clear(); // 🧼 clear previous frame
+            TextGraphics tg = screen.newTextGraphics();
 
-        TextGraphics tg = screen.newTextGraphics();
-        for (int y = 0; y < buffer.length; y++) {
-            for (int x = 0; x < buffer[y].length; x++) {
-                tg.setCharacter(x, y, buffer[y][x]);
+            for (int y = 0; y < buffer.length; y++) {
+                for (int x = 0; x < buffer[y].length; x++) {
+                    tg.setCharacter(x, y, buffer[y][x]);
+                }
             }
-        }
 
-        try {
-            screen.refresh();
+            screen.refresh(); // 🔁 draw new frame
+            Thread.yield();   // 🌬️ allow system to process draw
         } catch (Exception e) {
-            throw new RuntimeException("Failed to refresh screen", e);
+            throw new RuntimeException("Failed to render screen", e);
         }
     }
-
 }
